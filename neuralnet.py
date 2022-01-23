@@ -27,3 +27,17 @@ class NeuralNetwork:
         final_outputs = final_input # continuous
 
         return hidden_outputs, final_outputs
+
+
+    def backpropagation(self, X, y, final_output, hidden_output, delta_weights_i_h, delta_weights_h_o):
+        
+        error = y - final_output
+        output_error_term = error # continuous
+
+        hidden_error = np.dot(error, self.weights_hidden_to_output.T)
+        hidden_error_term = hidden_error * hidden_output * (1 - hidden_output)
+
+        delta_weights_i_h += hidden_error_term * X[:, None]
+        delta_weights_h_o += output_error_term * hidden_output[:, None]
+
+        return delta_weights_i_h, delta_weights_h_o
