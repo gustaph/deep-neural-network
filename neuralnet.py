@@ -49,3 +49,13 @@ class NeuralNetwork:
         self.weights_hidden_to_output += self.lr * delta_weights_h_o / n_records
 
         return
+
+    
+    def predict(self, X):
+        hidden_input = np.dot(X, self.weights_input_to_hidden)
+        hidden_output = self.activation_function(hidden_input)
+
+        final_input = np.dot(hidden_output, self.weights_hidden_to_output)
+        final_output = final_input # continuous
+
+        return final_output
