@@ -41,3 +41,11 @@ class NeuralNetwork:
         delta_weights_h_o += output_error_term * hidden_output[:, None]
 
         return delta_weights_i_h, delta_weights_h_o
+
+    
+    def update_weights(self, delta_weights_i_h, delta_weights_h_o, n_records):
+        
+        self.weights_input_to_hidden += self.lr * delta_weights_i_h / n_records
+        self.weights_hidden_to_output += self.lr * delta_weights_h_o / n_records
+
+        return
